@@ -1,0 +1,70 @@
+services:
+  lavalink:
+    # Build the customized Lavalink source in this checkout, including YUNA's ranker.
+    image: yuna-lavalink:local
+    build:
+      context: ../..
+      dockerfile: deploy/yuna/Dockerfile
+    container_name: yuna-lavalink
+    restart: unless-stopped
+    environment:
+      JAVA_TOOL_OPTIONS: "-Xms256M -Xmx1536M"
+      LAVALINK_SERVER_PASSWORD: ${LAVALINK_SERVER_PASSWORD:?Set LAVALINK_SERVER_PASSWORD in deploy/yuna/.env}
+      LAVASRC_SPOTIFY_CLIENT_ID: ${LAVASRC_SPOTIFY_CLIENT_ID:-}
+      LAVASRC_SPOTIFY_CLIENT_SECRET: ${LAVASRC_SPOTIFY_CLIENT_SECRET:-}
+      LAVASRC_ENABLE_SPOTIFY: ${LAVASRC_ENABLE_SPOTIFY:-false}
+      LAVASRC_APPLE_MUSIC_TOKEN: ${LAVASRC_APPLE_MUSIC_TOKEN:-}
+      LAVASRC_ENABLE_APPLE_MUSIC: ${LAVASRC_ENABLE_APPLE_MUSIC:-false}
+      LAVASRC_DEEZER_MASTER_KEY: ${LAVASRC_DEEZER_MASTER_KEY:-}
+      LAVASRC_DEEZER_ARL: ${LAVASRC_DEEZER_ARL:-}
+      LAVASRC_ENABLE_DEEZER: ${LAVASRC_ENABLE_DEEZER:-false}
+      LAVASRC_YANDEX_TOKEN: ${LAVASRC_YANDEX_TOKEN:-}
+      LAVASRC_ENABLE_YANDEX: ${LAVASRC_ENABLE_YANDEX:-false}
+      LAVASRC_VK_TOKEN: ${LAVASRC_VK_TOKEN:-}
+      LAVASRC_ENABLE_VK: ${LAVASRC_ENABLE_VK:-false}
+      LAVASRC_TIDAL_TOKEN: ${LAVASRC_TIDAL_TOKEN:-}
+      LAVASRC_ENABLE_TIDAL: ${LAVASRC_ENABLE_TIDAL:-false}
+      LAVASRC_QOBUZ_USER_TOKEN: ${LAVASRC_QOBUZ_USER_TOKEN:-}
+      LAVASRC_QOBUZ_APP_ID: ${LAVASRC_QOBUZ_APP_ID:-}
+      LAVASRC_QOBUZ_APP_SECRET: ${LAVASRC_QOBUZ_APP_SECRET:-}
+      LAVASRC_ENABLE_QOBUZ: ${LAVASRC_ENABLE_QOBUZ:-false}
+      LAVASRC_JIOSAAVN_SECRET_KEY: ${LAVASRC_JIOSAAVN_SECRET_KEY:-}
+      LAVASRC_ENABLE_JIOSAAVN: ${LAVASRC_ENABLE_JIOSAAVN:-false}
+    volumes:
+      - ./application.yml:/opt/Lavalink/application.yml:ro
+      - ./plugins:/opt/Lavalink/plugins
+      - ./logs:/opt/Lavalink/logs
+    ports:
+      # Keep the local YUNA connection private; members connect through Caddy/TLS.
+      - "127.0.0.1:2333:2333"
+    expose:
+      - "2333"
+    mem_limit: 2g
+    cpus: 1.5
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  caddy:
+    image: caddy:2
+    container_name: lavalink-caddy
+    restart: unless-stopped
+    environment:
+      LAVALINK_DOMAIN: ${LAVALINK_DOMAIN:?Set LAVALINK_DOMAIN in deploy/yuna/.env}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - lavalink
+    mem_limit: 128m
+    cpus: 0.25
+
+volumes:
+  caddy_data:
+  caddy_config:

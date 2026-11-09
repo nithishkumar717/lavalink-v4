@@ -1,0 +1,7 @@
+.gradle
+.idea
+**/build
+**/out
+deploy/yuna/.env
+deploy/yuna/plugins
+deploy/yuna/logs

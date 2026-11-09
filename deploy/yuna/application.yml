@@ -1,0 +1,99 @@
+server:
+  address: 0.0.0.0
+  port: 2333
+
+lavalink:
+  server:
+    password: ${LAVALINK_SERVER_PASSWORD}
+    sources:
+      # Use the maintained source plugin below instead of Lavalink's deprecated built-in source.
+      youtube: false
+      soundcloud: true
+      bandcamp: true
+      twitch: true
+      vimeo: true
+      nico: true
+      http: false
+      local: false
+    bufferDurationMs: 400
+    frameBufferDurationMs: 5000
+    opusEncodingQuality: 10
+    resamplingQuality: LOW
+    playerUpdateInterval: 5
+    youtubePlaylistLoadLimit: 6
+    youtubeSearchEnabled: true
+    soundcloudSearchEnabled: true
+    gc-warnings: true
+  plugins:
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.2"
+      snapshot: false
+    - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.8.3"
+      repository: "https://maven.lavalink.dev/releases"
+      snapshot: false
+    - dependency: "com.github.topi314.lavasearch:lavasearch-plugin:1.0.0"
+      repository: "https://maven.lavalink.dev/releases"
+      snapshot: false
+
+plugins:
+  youtube:
+    enabled: true
+    allowSearch: true
+    allowDirectVideoIds: true
+    allowDirectPlaylistIds: true
+    clients:
+      - MUSIC
+      - WEB
+      - ANDROID_VR
+  lavasrc:
+    providers:
+      - 'ytsearch:"%ISRC%"'
+      - "ytsearch:%QUERY%"
+    sources:
+      spotify: "${LAVASRC_ENABLE_SPOTIFY:false}"
+      applemusic: "${LAVASRC_ENABLE_APPLE_MUSIC:false}"
+      deezer: "${LAVASRC_ENABLE_DEEZER:false}"
+      yandexmusic: "${LAVASRC_ENABLE_YANDEX:false}"
+      flowerytts: true
+      youtube: true
+      vkmusic: "${LAVASRC_ENABLE_VK:false}"
+      tidal: "${LAVASRC_ENABLE_TIDAL:false}"
+      qobuz: "${LAVASRC_ENABLE_QOBUZ:false}"
+      ytdlp: true
+      jiosaavn: "${LAVASRC_ENABLE_JIOSAAVN:false}"
+    spotify:
+      clientId: "${LAVASRC_SPOTIFY_CLIENT_ID:}"
+      clientSecret: "${LAVASRC_SPOTIFY_CLIENT_SECRET:}"
+      countryCode: "IN"
+    applemusic:
+      countryCode: "IN"
+      mediaAPIToken: "${LAVASRC_APPLE_MUSIC_TOKEN:}"
+    deezer:
+      masterDecryptionKey: "${LAVASRC_DEEZER_MASTER_KEY:}"
+      arl: "${LAVASRC_DEEZER_ARL:}"
+      formats: ["MP3_128", "MP3_64"]
+    yandexmusic:
+      accessToken: "${LAVASRC_YANDEX_TOKEN:}"
+    vkmusic:
+      userToken: "${LAVASRC_VK_TOKEN:}"
+    tidal:
+      countryCode: "IN"
+      token: "${LAVASRC_TIDAL_TOKEN:}"
+    qobuz:
+      userOauthToken: "${LAVASRC_QOBUZ_USER_TOKEN:}"
+      appId: "${LAVASRC_QOBUZ_APP_ID:}"
+      appSecret: "${LAVASRC_QOBUZ_APP_SECRET:}"
+    ytdlp:
+      path: "/usr/local/bin/yt-dlp"
+      searchLimit: 10
+    jiosaavn:
+      decryption:
+        secretKey: "${LAVASRC_JIOSAAVN_SECRET_KEY:}"
+
+logging:
+  level:
+    root: INFO
+    lavalink: INFO
+  file:
+    path: ./logs/
+  request:
+    enabled: false

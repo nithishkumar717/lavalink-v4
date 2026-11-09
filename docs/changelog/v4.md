@@ -1,0 +1,158 @@
+# v4.2.2
+* Updated koe to version [`3.0.0-pre6`](https://github.com/KyokoBot/koe/releases/tag/3.0.0-pre6)
+* Updated libdave to version [`0.1.3`](https://github.com/KyokoBot/libdave-jvm/releases/tag/0.1.3)
+
+## v4.2.1
+* Updated koe to version [`3.0.0-pre5`](https://github.com/KyokoBot/koe/releases/tag/3.0.0-pre5)
+* Updated libdave to version [`0.1.0`](https://github.com/KyokoBot/libdave-jvm/releases/tag/0.1.0)
+
+## v4.2.0
+> [!IMPORTANT]
+> This is the first Lavalink release with [DAVE](https://daveprotocol.com/) (E2EE voice) support.
+> To use DAVE, you need to update your client library to a version that supports it.
+> The voice state has a new [`channelId`](../api/rest.md#voice-state) field which is required to connect to discords voice servers.
+
+* Added support for [DAVE](https://daveprotocol.com/) in https://github.com/lavalink-devs/Lavalink/pull/1190.
+* Added SoundCloud filter out preview tracks config option in https://github.com/lavalink-devs/Lavalink/pull/1191/changes/a0035055f35634b7d9c6bf727822ea44ed79ba8b
+
+## v4.1.2
+* Updated Lavaplayer to [`2.2.6`](https://github.com/lavalink-devs/lavaplayer/releases/tag/2.2.6)
+* Updated Koe to [`2.2.0-rc2`](https://github.com/KyokoBot/koe/releases/tag/2.2.0-rc2)
+* Downgrade docker images to Java `17` in https://github.com/lavalink-devs/Lavalink/pull/1162
+* Added before request logging configuration option in https://github.com/lavalink-devs/Lavalink/pull/1170
+* Added check for empty plugin files and redownload/delete them in https://github.com/lavalink-devs/Lavalink/pull/1178
+
+## v4.1.1
+* Updated Koe to [`2.1.1`](https://github.com/KyokoBot/koe/releases/tag/2.1.1) fixing voice gateway not connecting in https://github.com/lavalink-devs/Lavalink/commit/6f594a9154b48d1b72b1a6d65446c667f65ac986
+
+## v4.1.0
+* Added plugin update checker on start in https://github.com/lavalink-devs/Lavalink/pull/1121
+* Added full cause stack trace in exception object in https://github.com/lavalink-devs/Lavalink/pull/1128
+* Allow overriding default request timeouts in https://github.com/lavalink-devs/Lavalink/pull/1117
+* Added new docker image based on [`distroless`](https://github.com/GoogleContainerTools/distroless) & updated alpine variant to java 21 in https://github.com/lavalink-devs/Lavalink/pull/1131
+* Added custom Lavalink metrics prometheus collector in https://github.com/lavalink-devs/Lavalink/pull/1150
+* Added support for spring cloud config in https://github.com/lavalink-devs/Lavalink/pull/1144
+* Updated Koe to `2.1.0` & set `deafened` to true (This should lower the incoming traffic for Lavalink) in https://github.com/lavalink-devs/Lavalink/commit/5b0d139652fbd8d60d323c7c05b5b66d3665dc97
+* Fixed race condition when creating media connection and setting up playback in https://github.com/lavalink-devs/Lavalink/commit/588ca40c8b768cbe7c5748a94cfd8e8f1c97a2c4
+* Fixed filter values being omitted when default value is used in https://github.com/lavalink-devs/Lavalink/pull/1141
+* Fixed wrong CPU stats when spamming `/v4/stats` endpoint in https://github.com/lavalink-devs/Lavalink/pull/1151
+* Fixed plugin manager ignoring cmd args in https://github.com/lavalink-devs/Lavalink/pull/1129
+* Removed tls flags in dockerfile preventing tls 1.3 from working in https://github.com/lavalink-devs/Lavalink/pull/1118
+
+## v4.0.8
+* Updated koe to [`2.0.3-rc2`](https://github.com/KyokoBot/koe/releases/tag/2.0.3-rc2) & use voice gateway `v8` in [#1097](https://github.com/lavalink-devs/Lavalink/pull/1097)
+* Updated Lavaplayer to [`2.2.2`](https://github.com/lavalink-devs/lavaplayer/releases/tag/2.2.2) in [#1105](https://github.com/lavalink-devs/Lavalink/pull/1105)
+* Allow usage of non-allocating frame buffers in [#1095](https://github.com/lavalink-devs/Lavalink/pull/1095)
+* Added shutdown handling to close sessions cleanly in [#1102](https://github.com/lavalink-devs/Lavalink/pull/1102)
+
+## v4.0.7
+* Updated Lavaplayer to [`2.2.1`](https://github.com/lavalink-devs/lavaplayer/releases/tag/2.2.1)
+* Updated spring-boot to `3.3.0` & spring-websocket to `6.1.9`
+* Updated kotlin to `2.0.0` & kotlinx-serialization-json to `1.7.0`
+* Updated logback to `1.5.6` & sentry-logback to `7.10.0`
+
+## v4.0.6
+* Updated Lavaplayer to [`2.2.0`](https://github.com/lavalink-devs/lavaplayer/releases/tag/2.2.0)
+* Updated Koe to [`2.0.2`](https://github.com/KyokoBot/koe/releases/tag/2.0.2)
+
+## v4.0.5
+* Updated Lavaplayer to [`2.1.2`](https://github.com/lavalink-devs/lavaplayer/releases/tag/2.1.2)
+* Updated Koe to [`2.0.1`](https://github.com/KyokoBot/koe/releases/tag/2.0.1) (fixes the `IndexOutOfBoundsException` when playing a YouTube track)
+* Added option to enable [Nico](https://www.nicovideo.jp/) source
+* Expose Lavalink sessions to plugins via the `ISocketServer` interface
+
+!!! warning
+
+    The default Youtube source is now deprecated and won't receive further updates. Please use https://github.com/lavalink-devs/youtube-source#plugin instead.
+
+## v4.0.4
+* Updated Lavaplayer to [`2.1.1`](https://github.com/lavalink-devs/lavaplayer/releases/tag/2.1.1)
+
+## v4.0.3
+* Fixed plugins not registering (introduced in [`4.0.2`](https://github.com/lavalink-devs/Lavalink/releases/tag/4.0.2))
+* Fixed some issues where plugins would be redownloaded everytime lavalink started (introduced in [`4.0.1`](https://github.com/lavalink-devs/Lavalink/releases/tag/4.0.1))
+
+## v4.0.2
+* Fixed issue where all plugins get deleted when already present (introduced in [`v4.0.1`](https://github.com/lavalink-devs/Lavalink/releases/tag/4.0.1))
+* Always include plugin info & user data when serializing (introduced in [`v4.0.1`](https://github.com/lavalink-devs/Lavalink/releases/tag/4.0.1))
+* Updated oshi to `6.4.11`
+
+## v4.0.1
+* Updated Lavaplayer to `2.1.0`
+* Updated oshi to `6.4.8`
+* Fix/user data missing field exception in protocol
+* Fix plugin manager not deleting old plugin version
+* Fix not being able to seek when player is paused
+* Removed illegal reflection notice
+
+## v4.0.0
+* Lavalink now requires Java 17 or higher to run
+* **Removal of all websocket messages sent by the client. Everything is now done via [REST](../api/rest.md)**
+* Remove default 4GB max heap allocation from docker image
+* Removal of all `/v3` endpoints except `/version`. All other endpoints are now under `/v4`
+* Reworked track loading result. For more info see [here](../api/rest.md#track-loading-result)
+* Update docker ubuntu base image from focal(`20`) to jammy(`22`)
+* Update to Koe [`2.0.0-rc2`](https://github.com/KyokoBot/koe/releases/tag/2.0.0-rc2)
+* Update Lavaplayer to [`2.0.4`](https://github.com/lavalink-devs/lavaplayer/releases/tag/2.0.4), which includes native support for artwork urls and ISRCs in the track info
+* Update to the [Protocol Module](https://github.com/lavalink-devs/Lavalink/tree/master/protocol) to support Kotlin/JS
+* Allow setting user data on tracks in the REST API. For more info see [here](../api/rest.md#update-player-track)
+* Added default plugin repository. Plugin devs can now request their plugin to be added to the default repository. For more info see [here](../api/plugins.md#distributing-your-plugin)
+* Addition of full `Track` objects in following events: `TrackStartEvent`, `TrackEndEvent`, `TrackExceptionEvent`, `TrackStuckEvent`
+* Resuming a session now requires the `Session-Id` header instead of `Resume-Key` header
+* Add JDA-NAS support for musl (`x86-64`, `aarch64`) based systems (most notably `alpine`)
+* Add `Omissible#isPresent` & `Omissible#isOmitted` to the `protocol` module
+* New config option to specify the directory to load plugins from. `lavalink.pluginsDir` (defaults to `./plugins`)
+* Enable request logging by default
+* Fixed error when seeking and player is not playing anything in
+* Fixed null pointer when a playlist has no selected track
+
+!!! warning
+
+    Lavalink previously set the `-Xmx` flag to `4G` in docker. This caused issues with some systems which had less than 4GB of RAM. We have now removed this flag and let the JVM decide the max heap allocation. The default is 1GB or 25% of total memory, whichever is lower.
+    On how to increase the max heap allocation, see [here](https://lavalink.dev/configuration/docker.html#docker).
+
+<details markdown="1">
+<summary>v4.0.0 - Betas</summary>
+
+## v4.0.0-beta.5
+* Update lavaplayer to [`2.0.3`](https://github.com/lavalink-devs/lavaplayer/releases/tag/2.0.2) - Fixed YouTube access token errors
+* Added default plugin repository. Plugin devs can now request their plugin to be added to the default repository. For more info see [here](../api/plugins.md#distributing-your-plugin)
+* Fixed error when seeking and player is not playing anything in
+
+## v4.0.0-beta.4
+
+* Update lavaplayer to [`2.0.2`](https://github.com/lavalink-devs/lavaplayer/releases/tag/2.0.2) - Support MPEG 2.5 and fixed some requests not timing out
+* Add `Omissible#isPresent` & `Omissible#isOmitted` to the `protocol` module
+* Fix null pointer when a playlist has no selected track
+
+## v4.0.0-beta.3
+
+* Update lavaplayer to [`2.0.0`](https://github.com/lavalink-devs/lavaplayer/releases/tag/2.0.0) - Fixed YouTube 403 errors & YouTube access token errors
+
+## v4.0.0-beta.2
+
+* Update lavaplayer to [`08cfbc0`](https://github.com/Walkyst/lavaplayer-fork/commit/08cfbc05953128f3cf727ea3bcbe41dabcd1c7db) - Fixed ogg streaming
+* Add JDA-NAS support for musl (`x86-64`, `aarch64`) based systems (most notably `alpine`)
+* New config option to specify the directory to load plugins from. `lavalink.pluginsDir` (defaults to `./plugins`)
+
+## v4.0.0-beta.1
+
+* New Lavalink now requires Java 17 or higher to run
+* **Removal of all websocket messages sent by the client. Everything is now done via [REST](../api/rest.md)**
+* Update to [Lavaplayer custom branch](https://github.com/Walkyst/lavaplayer-fork/tree/custom), which includes native support for artwork urls and ISRCs in the track info
+* Addition of full `Track` objects in following events: `TrackStartEvent`, `TrackEndEvent`, `TrackExceptionEvent`, `TrackStuckEvent`
+* Resuming a session now requires the `Session-Id` header instead of `Resume-Key` header
+* Reworked track loading result. For more info see [here](../api/rest.md#track-loading-result)
+* Update to the [Protocol Module](https://github.com/lavalink-devs/Lavalink/tree/master/protocol) to support Kotlin/JS
+* Removal of all `/v3` endpoints except `/version`. All other endpoints are now under `/v4`
+
+!!! warning
+
+    This is a beta release, and as such, may contain bugs. Please report any bugs you find to the [issue tracker](https://github.com/lavalink-devs/Lavalink/issues/new/choose).
+    For more info on the changes in this release, see [here](./index.md#significant-changes)
+    If you have any question regarding the changes in this release, please ask in the [support server]({{ discord_help }}) or [GitHub discussions](https://github.com/lavalink-devs/Lavalink/discussions/categories/q-a)
+
+Contributors:
+[@topi314](https://github.com/topi314), [@freyacodes](https://github.com/freyacodes), [@DRSchlaubi](https://github.com/DRSchlaubi) and [@melike2d](https://github.com/melike2d)
+
+</details>
