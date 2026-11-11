@@ -91,6 +91,12 @@ for Spotify, Apple Music, Deezer, Yandex Music, VK Music, Tidal, Qobuz, JioSaavn
 YouTube Music, and yt-dlp, as well as Lavalink's SoundCloud, Bandcamp, Twitch,
 Vimeo, and Nico sources. `http` and `local` are disabled for this public node.
 
+YouTube playback uses OAuth and the remote cipher endpoint configured in
+`application.yml`. Set `YOUTUBE_OAUTH_REFRESH_TOKEN` in `.env`; keep it private.
+The cipher endpoint is a public third-party service with its own availability
+and rate limits. For a fully self-hosted deployment, run a private yt-cipher
+service and point `plugins.youtube.remoteCipher.url` at it.
+
 Fill the relevant `LAVASRC_*` values in `.env` before using providers that need
 credentials, then set that provider's `LAVASRC_ENABLE_*` flag to `true`.
 Apple Music needs an API token; Spotify needs a client ID and secret; Deezer
