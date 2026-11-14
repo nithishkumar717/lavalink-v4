@@ -93,6 +93,9 @@ Vimeo, and Nico sources. `http` and `local` are disabled for this public node.
 
 YouTube playback uses OAuth and the remote cipher endpoint configured in
 `application.yml`. Set `YOUTUBE_OAUTH_REFRESH_TOKEN` in `.env`; keep it private.
+An optional PoToken pair can be set with `YOUTUBE_PO_TOKEN` and
+`YOUTUBE_VISITOR_DATA`. The plugin applies that pair to WEB clients alongside
+OAuth; it does not guarantee access to videos that require sign-in.
 The cipher endpoint is a public third-party service with its own availability
 and rate limits. For a fully self-hosted deployment, run a private yt-cipher
 service and point `plugins.youtube.remoteCipher.url` at it.
@@ -103,9 +106,12 @@ Apple Music needs an API token; Spotify needs a client ID and secret; Deezer
 needs its master key and ARL; Yandex, VK, Tidal, and Qobuz each need their
 tokens; JioSaavn needs its decryption key. Credential-dependent providers
 default to off so a missing token does not prevent the node from starting.
-Spotify and Apple Music are metadata mirrors: the configured providers resolve
-them to playable YouTube or Deezer tracks instead of streaming from Spotify or
-Apple Music directly.
+Spotify and Apple Music are metadata mirrors: they resolve track metadata to
+playable tracks from another provider. The configured provider order tries
+JioSaavn first, then YouTube by ISRC or title. JioSaavn needs its secret key
+and enable flag; Spotify and Apple Music also need their credentials and flags.
+Wynk is not supported by the plugins configured here. Gaana would require an
+additional third-party plugin and is not enabled in this build.
 
 YUNA's direct guest search remains the candidate provider for its custom rank
 endpoint. YUNA's current direct audio playback path is still in use until its
